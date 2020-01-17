@@ -45,11 +45,9 @@ class SearchBar extends React.Component{
           />
         </div>
         <div styles={{paddingTop: 10}}>
-          <a onClick={this.search}>
-            <Button variant='contained' color="primary">
+            <Button variant='contained' color="primary" onClick={this.search}>
               Search
             </Button>
-          </a>
         </div>
       </div>
     );
