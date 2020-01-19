@@ -38,22 +38,13 @@ export default function Recipe(props) {
   const instructions = props.recipe.analyzedInstructions[0]
 
 
- //  	id: recipe.id,
-	// name: recipe.title,
-	// image: recipe.image,
-	// servings: recipe.servings,
-	// readyInMinutes: recipe.readyInMinutes,
-	// sourceName: recipe.sourceName,
-	// sourceUrl: recipe.sourceUrl,
-	// likes: recipe.aggregateLikes,
+ 
 	// health: recipe.healthScore,
 	// cost: recipe.pricePerServing,
 	// dairyFree: recipe.dairyFree,
 	// glutenFree: recipe.glutenFree,
 	// ketogenic: recipe.ketogenic,
 	// vegan: recipe.vegan,
-	// ingredients: recipe.extendedIngredients,
-	// instructions: recipe.analyzedInstructions,
 	// nutrition: recipe.nutrition,
 
   return (
@@ -99,7 +90,7 @@ export default function Recipe(props) {
 			</CardContent>
           </Card>
 
-			      <div>
+			      <div style={{ width: '95%', margin: '0 auto', }}>
 			      	<Typography variant="h4" component="h4" style={{ paddingTop: 40 }}>
 			      		Ingredients
 			      	</Typography>
@@ -111,7 +102,7 @@ export default function Recipe(props) {
 				      }
 				     </ul>
 				  </div>
-				  <div>
+				  <div style={{ width: '95%', margin: '0 auto', }}>
 			      	<Typography variant="h4" component="h4" style={{ paddingTop: 20 }}>
 			      		Instructions
 			      	</Typography>

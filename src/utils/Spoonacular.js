@@ -3,7 +3,7 @@ const key = '4fda5e30430c43798bef73feb3648e81'
 const Spoonacular = {
 	
 	byIngredients(terms) {
-		return fetch('https://api.spoonacular.com/recipes/findByIngredients?apiKey='+key+'&ingredients='+terms+'&number=100&ranking=2', {
+		return fetch('https://api.spoonacular.com/recipes/findByIngredients?apiKey='+key+'&ingredients='+terms+'&number=50&ranking=2', {
 			headers: {'Content-Type': 'application/json'}
 		}).then(
 			response => {
@@ -36,7 +36,9 @@ const Spoonacular = {
 	      throw new Error('Network error');
 		}).then(recipe => {
 		    if (recipe) {
+		      console.log(recipe.nutrition);
 		      console.log(recipe.extendedIngredients);
+		      console.log(recipe.analyzedInstructions[0]);
 		      return recipe;
 		  	}
 		    else{

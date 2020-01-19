@@ -46,6 +46,8 @@ export default function RecipeCard(props) {
               type="submit"
               size="small"
               onClick={() => props.handleClick(props.recipe.id)}
+              color="primary"
+              variant="contained"
             >
               Learn More
             </Button>

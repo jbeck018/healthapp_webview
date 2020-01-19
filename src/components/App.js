@@ -51,7 +51,7 @@ class App extends React.Component {
 
     if (isHome) {
       to_display = <div>
-          <AppBar position="static">
+          <AppBar position="fixed">
             <Toolbar>
               <Typography variant="h6">
                 Recipes

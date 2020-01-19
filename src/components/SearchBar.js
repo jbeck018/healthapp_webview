@@ -32,7 +32,7 @@ class SearchBar extends React.Component{
 
   render() {
     return(
-      <div>
+      <div style={{ paddingBottom: '25px' }} >
         <div>
           <TextField 
             multiline
