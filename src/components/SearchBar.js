@@ -44,7 +44,7 @@ class SearchBar extends React.Component{
             margin='dense'
           />
         </div>
-        <div styles={{paddingTop: 10}}>
+        <div styles={{paddingTop: 20}}>
             <Button variant='contained' color="primary" onClick={this.search}>
               Search
             </Button>
