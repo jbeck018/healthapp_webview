@@ -36,6 +36,7 @@ const Spoonacular = {
 	      throw new Error('Network error');
 		}).then(recipe => {
 		    if (recipe) {
+		      console.log(recipe.extendedIngredients);
 		      return recipe;
 		  	}
 		    else{

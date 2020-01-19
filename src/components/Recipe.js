@@ -9,6 +9,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import AccessTimeRoundedIcon from '@material-ui/icons/AccessTimeRounded';
+import RestaurantRoundedIcon from '@material-ui/icons/RestaurantRounded';
+import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import './general.css';
 
 const useStyles = makeStyles(theme => ({
@@ -28,6 +31,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Recipe(props) {
   const classes = useStyles();
+  const madeBy = props.recipe.sourceName ? <Typography style={{ textAlign: 'center' }} variant="body2" gutterBottom>
+			      	Courtesy of <a href={props.recipe.sourceUrl}>{props.recipe.sourceName}</a>
+			      </Typography> : null
+
+  const instructions = props.recipe.analyzedInstructions[0]
 
 
  //  	id: recipe.id,
@@ -74,21 +82,52 @@ export default function Recipe(props) {
 	            <Typography variant="h4" component="h2">
 	              {props.recipe.title}
 	            </Typography>
-	          </CardContent>
+	            {madeBy}
+	            <Grid item xs={12} style={{ paddingTop: 20 }}>
+			        <Grid container justify="center" spacing={2} alignItems="center">
+			            <Grid key='servings' item>
+			             	<RestaurantRoundedIcon fontSize="small" /><b>:</b> {props.recipe.servings}
+			            </Grid>
+			     		<Grid key='time' item>
+			             	<AccessTimeRoundedIcon fontSize="small" /><b>:</b> {props.recipe.readyInMinutes} minutes
+			            </Grid>
+			            <Grid key='likes' item>
+			             	<FavoriteBorderRoundedIcon fontSize="small" /><b>:</b> {props.recipe.aggregateLikes}
+			            </Grid>
+			        </Grid>
+			      </Grid>
+			</CardContent>
           </Card>
-	      <Grid item xs={12}>
-	        <Grid container justify="center" spacing={1}>
-	            <Grid key='servings' item>
-	             	Serves: {props.recipe.servings}
-	            </Grid>
-	     		<Grid key='time' item>
-	             	Ready in: {props.recipe.readyInMinutes} minutes
-	            </Grid>
-	            <Grid key='likes' item>
-	             	Likes: {props.recipe.aggregateLikes}
-	            </Grid>
-	        </Grid>
-	      </Grid>
+
+			      <div>
+			      	<Typography variant="h4" component="h4" style={{ paddingTop: 40 }}>
+			      		Ingredients
+			      	</Typography>
+			      	<ul style={{ paddingTop: 20 }}>
+				      {
+				      	props.recipe.extendedIngredients.map(item => {
+				      		return <li key={item.id} >{item.original}</li>
+				      	})
+				      }
+				     </ul>
+				  </div>
+				  <div>
+			      	<Typography variant="h4" component="h4" style={{ paddingTop: 20 }}>
+			      		Instructions
+			      	</Typography>
+			      	<ol style={{ paddingTop: 20, paddingBottom: 50 }}>
+				      {
+				      	instructions.steps.map(item => {
+				      		return <li key={item.number}>{item.step}</li>;
+				      	})
+				      }
+				     </ol>
+				  </div>
+			     
+          <Typography>
+
+          </Typography>
+	      
 	    </div>
     </div>
   );

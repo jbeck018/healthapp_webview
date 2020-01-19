@@ -34,7 +34,7 @@ export default function RecipeCard(props) {
           <CardMedia
             className={classes.media}
             image={props.recipe.image}
-            title="Contemplative Reptile"
+            title={props.recipe.name}
           />
           <CardContent>
             <Typography variant="h5" component="h2">
