@@ -12,7 +12,8 @@ const Spoonacular = {
 	      		}
 	      throw new Error('Network error');
 		}).then(jsonResponse => {
-		    if (jsonResponse) {
+		    if (jsonResponse) {	
+		      console.log(jsonResponse);
 		      return jsonResponse.map(recipe => ({
 		        id: recipe.id,
 		        name: recipe.title,
@@ -24,8 +25,10 @@ const Spoonacular = {
 	  	})	
 	},
 
+	
+
 	forRecipe(id) {
-		const url = 'https://api.spoonacular.com/recipes/'+id+'/information?apiKey='+key+'&includeNutrition=true'
+		const url = 'https://api.spoonacular.com/recipes/'+id+'/information?apiKey='+key+'&includeNutrition=true';
 		return fetch(url, {
 			headers: {'Content-Type': 'application/json'}
 		}).then(
@@ -36,9 +39,6 @@ const Spoonacular = {
 	      throw new Error('Network error');
 		}).then(recipe => {
 		    if (recipe) {
-		      console.log(recipe.nutrition);
-		      console.log(recipe.extendedIngredients);
-		      console.log(recipe.analyzedInstructions[0]);
 		      return recipe;
 		  	}
 		    else{
