@@ -15,10 +15,6 @@ class App extends React.Component {
       searchResults: [],
       recipeDetails: [],
       isHome: true,
-      intols: '',
-      diet: '',
-      cuisine: '',
-      ingredients: '',
     }
 
     this.search = this.search.bind(this);
@@ -26,8 +22,8 @@ class App extends React.Component {
     this.back = this.back.bind(this);
   }
 
-  search(term) {
-    Spoonacular.onComplex(term,this.state.ingredients, this.state.cuisine, this.state.diet, this.state.intols).then(searchResults => {
+  search(term, ingredients, cuisine, diet, intols) {
+    Spoonacular.onComplex(term, ingredients, cuisine, diet, intols).then(searchResults => {
       this.setState({
         searchResults: searchResults
       });
