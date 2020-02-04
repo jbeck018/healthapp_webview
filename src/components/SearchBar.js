@@ -5,12 +5,14 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { purple } from '@material-ui/core/colors';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
+import Checkbox from '@material-ui/core/Checkbox';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 
 
 const theme = createMuiTheme({
@@ -26,6 +28,13 @@ const theme = createMuiTheme({
   },
 });
 
+const cuisineList = ['African', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese', 'Eastern European', 'European', 
+                     'French', 'German', 'Greek', 'Indian', 'Irish', 'Italian', 'Japanese', 'Jewish', 'Korean', 'Latin American', 
+                     'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'Southern', 'Spanish', 'Thai', 'Vietnamese']
+const dietList = ['Whole30', 'Primal', 'Paleo', 'Pescetarian', 'Vegan', 'Ovo-Vegetarian', 'Lacto-Vegetarian',
+                  'Vegetarian', 'Ketogenic', 'Gluten Free']
+const intolList = ['Dairy', 'Egg', 'Gluten', 'Grain', 'Peanut', 'Seafood', 'Sesame', 'Shellfish', 'Soy', 
+                   'Sulfite', 'Tree Nut', 'Wheat']
 
 class SearchBar extends React.Component{
   constructor(props){
@@ -72,6 +81,21 @@ class SearchBar extends React.Component{
       this.setState({
         showIng: !this.state.showIng,
       })
+    } 
+    if (id === 'cuisine'){
+      this.setState({
+        showCuisine: !this.state.showCuisine,
+      })
+    }
+    if (id === 'diet'){
+      this.setState({
+        showDiet: !this.state.showDiet,
+      })
+    } 
+    if (id === 'intolerances'){
+      this.setState({
+        showInt: !this.state.showInt,
+      })
     }
   }
 
@@ -95,12 +119,26 @@ class SearchBar extends React.Component{
         role="presentation"
       >
         <List>
-            <ListItem key='cuisine' button>
+            <ListItem key='cuisine' onClick={() => this.toggleView('cuisine')} button>
               <ListItemText 
                 primary='Cuisine' 
                 secondary='Select what type of cuisine(s) to find'
               />
             </ListItem>
+            { (this.state.showCuisine) ?
+                <ListItem>
+                  <FormGroup>
+                  {
+                    cuisineList.map(item => {
+                      return <FormControlLabel
+                        control={<Checkbox />}
+                        label={item}
+                      />
+                    })
+                  }
+                  </FormGroup>
+                </ListItem> : null
+            }
             <Divider />
             <ListItem button onClick={() => this.toggleView('ingredients')} key='ingredients' >
               <ListItemText 
@@ -114,25 +152,54 @@ class SearchBar extends React.Component{
                   multiline
                   fullWidth
                   style={{margin: '0 auto'}}
-                  placeholder="Apple, steak, parmesian"
+                  placeholder={this.state.ingredients}
                   variant='outlined' 
                 />
               </ListItem> : null
             }
             <Divider />
-            <ListItem key='diet' button>
+            <ListItem key='diet' button onClick={() => this.toggleView('diet')}>
               <ListItemText 
                 primary='Diet'
                 secondary='Sort by your diet'
               />
             </ListItem>
+            { (this.state.showDiet) ?
+                <ListItem>
+                  <FormGroup>
+                  {
+                    dietList.map(item => {
+                      return <FormControlLabel
+                        control={<Checkbox />}
+                        label={item}
+                      />
+                    })
+                  }
+                  </FormGroup>
+                </ListItem> : null
+            }
             <Divider />
-            <ListItem key='intols' button>
+            <ListItem key='intols' button onClick={() => this.toggleView('intolerances')}>
               <ListItemText 
                 primary='Intolerances'
-                secondary='Filter out your intolerences' 
+                secondary='Filter out your intolerances' 
               />
             </ListItem>
+            { (this.state.showInt) ?
+                <ListItem>
+                  <FormGroup>
+                  {
+                    intolList.map(item => {
+                      return <FormControlLabel
+                        control={<Checkbox />}
+                        label={item}
+                      />
+                    })
+                  }
+                  </FormGroup>
+                </ListItem> : null
+            }
+            <Divider />
             <ListItem>
               <Button variant='contained' color="primary" onClick={this.toggleDrawer}>
                 Done!
