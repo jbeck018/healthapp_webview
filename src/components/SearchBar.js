@@ -28,7 +28,7 @@ const theme = createMuiTheme({
   },
 });
 
-const cuisineList = ['African', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese', 'Eastern European', 'European', 
+const cuisineList = ['African', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese', 'Russian', 'European', 
                      'French', 'German', 'Greek', 'Indian', 'Irish', 'Italian', 'Japanese', 'Jewish', 'Korean', 'Latin American', 
                      'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'Southern', 'Spanish', 'Thai', 'Vietnamese']
 const dietList = ['Whole30', 'Primal', 'Paleo', 'Pescetarian', 'Vegan', 'Ovo-Vegetarian', 'Lacto-Vegetarian',
@@ -57,12 +57,14 @@ class SearchBar extends React.Component{
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleView = this.toggleView.bind(this);
+    this.handleIngredientChange = this.handleIngredientChange.bind(this);
   }
 
   search(){
+    let cuisine = this.state.cuisine.includes('Russian,') ? this.state.cuisine.replace('Russian', 'Eastern European') : this.state.cuisine;
     this.props.onSearch(this.state.term, 
                         this.state.ingredients, 
-                        this.state.cuisine, 
+                        cuisine, 
                         this.state.diet, 
                         this.state.intols);
   }
@@ -99,9 +101,51 @@ class SearchBar extends React.Component{
     }
   }
 
+  handleCheck(id, item){
+    if (id === 'cuisine'){
+      if (this.state.cuisine.includes(item)){
+        this.setState({
+          cuisine: this.state.cuisine.replace(item, ''),
+        })
+      } else {
+        this.setState({
+          cuisine: this.state.cuisine.concat(item)
+        })
+      }
+    }
+    if (id === 'diet'){
+      if (this.state.diet.includes(item)){
+        this.setState({
+          diet: this.state.diet.replace(item, ''),
+        })
+      } else {
+        this.setState({
+          diet: this.state.diet.concat(item)
+        })
+      }
+    } 
+    if (id === 'intolerances'){
+      if (this.state.intols.includes(item)){
+        this.setState({
+          intols: this.state.intols.replace(item, ''),
+        })
+      } else {
+        this.setState({
+          intols: this.state.intols.concat(item)
+        })
+      }
+    }
+  }
+
   handleTermChange(event){
     this.setState({
       term: event.target.value,
+    });
+  }
+
+  handleIngredientChange(event){
+    this.setState({
+      ingredients: event.target.value,
     });
   }
 
@@ -131,8 +175,14 @@ class SearchBar extends React.Component{
                   {
                     cuisineList.map(item => {
                       return <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                          <Checkbox 
+                            checked={this.state.cuisine.includes(item.toLowerCase()) ? true : false}
+                            onClick={() => this.handleCheck('cuisine', item.toLowerCase()+',')}
+                          />
+                        }
                         label={item}
+                        id={item}
                       />
                     })
                   }
@@ -153,7 +203,9 @@ class SearchBar extends React.Component{
                   fullWidth
                   style={{margin: '0 auto'}}
                   placeholder={this.state.ingredients}
-                  variant='outlined' 
+                  variant='outlined'
+                  onChange={this.handleIngredientChange} 
+                  defaultValue={this.state.ingredients} 
                 />
               </ListItem> : null
             }
@@ -170,8 +222,14 @@ class SearchBar extends React.Component{
                   {
                     dietList.map(item => {
                       return <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                          <Checkbox 
+                            checked={this.state.diet.includes(item.toLowerCase()) ? true : false}
+                            onClick={() => this.handleCheck('diet', item.toLowerCase()+',')}
+                          />
+                        }
                         label={item}
+                        id={item}
                       />
                     })
                   }
@@ -191,8 +249,14 @@ class SearchBar extends React.Component{
                   {
                     intolList.map(item => {
                       return <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                          <Checkbox 
+                            checked={this.state.intols.includes(item.toLowerCase()) ? true : false}
+                            onClick={() => this.handleCheck('intolerances', item.toLowerCase()+',')}
+                          />
+                        }
                         label={item}
+                        id={item}
                       />
                     })
                   }
