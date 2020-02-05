@@ -13,6 +13,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import './general.css'
 
 
 const theme = createMuiTheme({
@@ -287,10 +288,11 @@ class SearchBar extends React.Component{
             margin='dense'
           />
           <button 
-            style={{ width: '14%', margin: '5px auto 0 auto',}}
-            onClick={this.toggleDrawer} 
+            onClick={this.toggleDrawer}
+            className="button" 
+            style={{ width: '14%', margin: '3px auto',}}
           >
-            <FilterListIcon fontSize="large"/>
+            <FilterListIcon fontSize="large" />
           </button>
         </div>
         <div>
