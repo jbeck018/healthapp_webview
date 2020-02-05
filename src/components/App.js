@@ -22,8 +22,8 @@ class App extends React.Component {
     this.back = this.back.bind(this);
   }
 
-  search(term) {
-    Spoonacular.byIngredients(term).then(searchResults => {
+  search(term, ingredients, cuisine, diet, intols) {
+    Spoonacular.onComplex(term, ingredients, cuisine, diet, intols).then(searchResults => {
       this.setState({
         searchResults: searchResults
       });
