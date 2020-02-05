@@ -51,13 +51,6 @@ class App extends React.Component {
 
     if (isHome) {
       to_display = <div>
-          <AppBar position="fixed">
-            <Toolbar>
-              <Typography variant="h6">
-                Recipes
-              </Typography>
-            </Toolbar>
-          </AppBar>
           <div className='main_view'>
             <SearchBar onSearch = {this.search}/>
             <Results searchResults = {this.state.searchResults} handleClick = {this.recipe} />

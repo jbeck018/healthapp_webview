@@ -286,6 +286,7 @@ class SearchBar extends React.Component{
             onKeyDown={this.handleKeyPress} 
             placeholder="Alfredo" 
             margin='dense'
+            defaultValue={this.state.ingredients}
           />
           <button 
             onClick={this.toggleDrawer}

@@ -47,7 +47,7 @@ const Spoonacular = {
 	  	})	
 	},
 
-	onComplex(query,ingredients, cuisine, diet, intols) {
+	onComplex(query,ingredients, cuisine, diet, intols, sort) {
 		let base = 'https://api.spoonacular.com/recipes/complexSearch?apiKey='+key
 		//for api: query, cuisine, diet, intolerances, includeIngredients
 		const params = [
@@ -71,6 +71,10 @@ const Spoonacular = {
 				'name': 'intolerances',
 				'item': intols,
 			},
+			{
+				'name': 'sort',
+				'item': 'popularity'
+			}
 		]
 
 		let options = ''
@@ -82,6 +86,7 @@ const Spoonacular = {
 		})
 
 		const url = base + options + '&number=10&instructionsRequired=true'
+		console.log(url);
 
 		return fetch(url, {
 			headers: {'Content-Type': 'application/json'}
