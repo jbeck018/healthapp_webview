@@ -50,11 +50,12 @@ export default function Recipe(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" style={{ paddingTop: '15px', paddingBottom: '15px' }}>
+      <AppBar position="fixed" style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Toolbar>
           <IconButton 
           	edge="start" 
           	className={classes.menuButton} 
+          	fontSize="large"
           	color="inherit" 
           	aria-label="back"
           	onClick = {() => props.handleClick()}
