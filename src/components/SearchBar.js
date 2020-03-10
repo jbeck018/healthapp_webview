@@ -280,7 +280,7 @@ class SearchBar extends React.Component{
 
     return(
       <div>
-        <AppBar position="fixed" style={{ paddingTop: '20px', paddingBottom: '10px' }}>
+        <AppBar position="fixed" style={{ paddingTop: '25px', paddingBottom: '5px' }}>
           <Toolbar>
             <Typography variant="h6">
               Home
