@@ -15,6 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import './general.css'
 
 
@@ -279,9 +280,11 @@ class SearchBar extends React.Component{
 
     return(
       <div>
-        <AppBar position="fixed">
+        <AppBar position="fixed" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
           <Toolbar>
-            Home
+            <Typography variant="h6">
+              Home
+            </Typography>
           </Toolbar>
         </AppBar>
         <div style={{ paddingBottom: '25px', paddingTop: '60px'}} >

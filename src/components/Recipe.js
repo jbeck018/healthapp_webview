@@ -50,7 +50,7 @@ export default function Recipe(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
         <Toolbar>
           <IconButton 
           	edge="start" 
