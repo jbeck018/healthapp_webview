@@ -109,6 +109,67 @@ const Spoonacular = {
 		    }
 	  	})	
 	},
+
+	mealPrep(timeFrame, targetCalories, diet, exclude) {
+		const params = [
+			{
+				'name': 'timeFrame',
+				'item': timeFrame,
+			},
+			{
+				'name': 'targetCalories',
+				'item': targetCalories,
+			},
+			{
+				'name': 'diet',
+				'item': diet,
+			},
+			{
+				'name': 'exclude',
+				'item': exclude,
+			},
+		]
+
+		let options = ''
+
+		params.filter(function(clean){
+			return clean.item !== ""
+		}).forEach(item => {
+			options = options + '&' + item.name + '=' + item.item
+		})
+		console.log('https://api.spoonacular.com/mealplanner/generate?apiKey='+key+options)
+		return fetch('https://api.spoonacular.com/mealplanner/generate?apiKey='+key+options, {
+			headers: {'Content-Type': 'application/json'}
+		}).then(
+			response => {
+				if(response.ok){
+	        		return response.json();
+	      		}
+	      throw new Error('Network error');
+		}).then(jsonResponse => {
+		    if (jsonResponse) {	
+		      // console.log(jsonResponse);
+		      if (timeFrame === 'week'){
+		      	console.log(jsonResponse.week)
+		      	return jsonResponse.week.map(recipe => ({
+			        id: recipe.id,
+			        name: recipe.title,
+			        image: 'https://spoonacular.com/recipeImages/'+recipe.image
+			      }));
+		      } else {
+		      	console.log(jsonResponse)
+		      	return jsonResponse.meals.map(recipe => ({
+		      		id: recipe.id,
+		      		name: recipe.title,
+		      		image: 'https://spoonacular.com/recipeImages/'+recipe.image,
+		      	}))
+		      }
+		      
+		    }else{
+		      return [];
+		    }
+	  	})	
+	},
 }
 
 export default Spoonacular;
