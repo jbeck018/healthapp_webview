@@ -287,7 +287,7 @@ class SearchBar extends React.Component{
             </Typography>
           </Toolbar>
         </AppBar>
-        <div style={{ paddingBottom: '25px', marginTop: '75px'}} >
+        <div style={{ paddingBottom: '25px', marginTop: '85px'}} >
           <div style={{ paddingBottom: '12.5px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <TextField 
               multiline
