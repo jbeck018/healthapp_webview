@@ -13,6 +13,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import './general.css'
 
 
@@ -164,6 +166,26 @@ class SearchBar extends React.Component{
         role="presentation"
       >
         <List>
+            <ListItem button onClick={() => this.toggleView('ingredients')} key='ingredients' >
+              <ListItemText 
+                primary='Ingredients' 
+                secondary='Enter ingredients seperated by a comma'
+              />
+            </ListItem>
+            { (this.state.showIng) ?
+              <ListItem>
+                <TextField 
+                  multiline
+                  fullWidth
+                  style={{margin: '0 auto'}}
+                  placeholder={this.state.ingredients}
+                  variant='outlined'
+                  onChange={this.handleIngredientChange} 
+                  defaultValue={this.state.ingredients} 
+                />
+              </ListItem> : null
+            }
+            <Divider />
             <ListItem key='cuisine' onClick={() => this.toggleView('cuisine')} button>
               <ListItemText 
                 primary='Cuisine' 
@@ -191,26 +213,7 @@ class SearchBar extends React.Component{
                 </ListItem> : null
             }
             <Divider />
-            <ListItem button onClick={() => this.toggleView('ingredients')} key='ingredients' >
-              <ListItemText 
-                primary='Ingredients' 
-                secondary='Enter ingredients seperated by a comma'
-              />
-            </ListItem>
-            { (this.state.showIng) ?
-              <ListItem>
-                <TextField 
-                  multiline
-                  fullWidth
-                  style={{margin: '0 auto'}}
-                  placeholder={this.state.ingredients}
-                  variant='outlined'
-                  onChange={this.handleIngredientChange} 
-                  defaultValue={this.state.ingredients} 
-                />
-              </ListItem> : null
-            }
-            <Divider />
+            
             <ListItem key='diet' button onClick={() => this.toggleView('diet')}>
               <ListItemText 
                 primary='Diet'
@@ -275,37 +278,43 @@ class SearchBar extends React.Component{
     );
 
     return(
-      <div style={{ paddingBottom: '25px' }} >
-        <div style={{ paddingBottom: '12.5px' }}>
-          <TextField 
-            multiline
-            fullWidth
-            style={{ width: '85%', float: 'left'}}
-            //helperText='Enter ingredients seperated by a comma'
-            onChange={this.handleTermChange} 
-            onKeyDown={this.handleKeyPress} 
-            placeholder="Alfredo" 
-            margin='dense'
-            defaultValue={this.state.ingredients}
-          />
-          <button 
-            onClick={this.toggleDrawer}
-            className="button" 
-            style={{ width: '14%', margin: '3px auto',}}
-          >
-            <FilterListIcon fontSize="large" />
-          </button>
+      <div>
+        <AppBar position="fixed">
+          <Toolbar>
+            Home
+          </Toolbar>
+        </AppBar>
+        <div style={{ paddingBottom: '25px', paddingTop: '60px'}} >
+          <div style={{ paddingBottom: '12.5px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <TextField 
+              multiline
+              fullWidth
+              style={{ flexGrow: '2' }}
+              //helperText='Enter ingredients seperated by a comma'
+              onChange={this.handleTermChange} 
+              onKeyDown={this.handleKeyPress} 
+              placeholder="Keyword Search" 
+              margin='dense'
+              defaultValue={this.state.ingredients}
+            />
+            <button 
+              onClick={this.toggleDrawer}
+              className="button"
+            >
+              <FilterListIcon fontSize="large" />
+            </button>
+          </div>
+          <div>
+            <ThemeProvider theme={theme}>
+              <Button variant='contained' color="primary" onClick={this.search}>
+                Search
+              </Button>
+            </ThemeProvider>  
+          </div>
+          <Drawer anchor="right" open={this.state.open} onClose={this.toggleDrawer}>
+            {filterList}
+          </Drawer>
         </div>
-        <div>
-          <ThemeProvider theme={theme}>
-            <Button variant='contained' color="primary" onClick={this.search}>
-              Search
-            </Button>
-          </ThemeProvider>  
-        </div>
-        <Drawer anchor="right" open={this.state.open} onClose={this.toggleDrawer}>
-          {filterList}
-        </Drawer>
       </div>
     );
   }
