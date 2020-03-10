@@ -137,7 +137,7 @@ class MealPlanner extends React.Component{
 
     const filterList = (
       <div
-        style={{ width: 250 }}
+        style={{ width: 250, marginTop: '50px' }}
         role="presentation"
       >
         <List>
