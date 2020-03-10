@@ -64,7 +64,7 @@ export default function Recipe(props) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <div>
+      <div style={{marginTop: '50px',}}>
       	  <Card className={classes.card}>
 	          <CardMedia
 	            className={classes.media}
