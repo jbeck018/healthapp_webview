@@ -280,14 +280,14 @@ class SearchBar extends React.Component{
 
     return(
       <div>
-        <AppBar position="fixed" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
+        <AppBar position="fixed" style={{ paddingTop: '10px', paddingBottom: '5px' }}>
           <Toolbar>
             <Typography variant="h6">
               Home
             </Typography>
           </Toolbar>
         </AppBar>
-        <div style={{ paddingBottom: '25px', paddingTop: '60px'}} >
+        <div style={{ paddingBottom: '25px', marginTop: '70px'}} >
           <div style={{ paddingBottom: '12.5px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <TextField 
               multiline
