@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 export default function Recipe(props) {
   const classes = useStyles();
   const madeBy = props.recipe.sourceName ? <Typography style={{ textAlign: 'center' }} variant="body2" gutterBottom>
-			      	Courtesy of <a href={props.recipe.sourceUrl}>{props.recipe.sourceName}</a>
+			      	Courtesy of <a href={props.recipe.sourceUrl} target="_blank">{props.recipe.sourceName}</a>
 			      </Typography> : null
 
   const instructions = props.recipe.analyzedInstructions[0];
@@ -72,7 +72,7 @@ export default function Recipe(props) {
 	            title={props.recipe.title}
 	          />
 	          <CardContent>
-	            <Typography variant="h4" component="h2">
+	            <Typography variant="h4" component="h2" style={{textAlign: 'center'}}>
 	              {props.recipe.title}
 	            </Typography>
 	            {madeBy}
